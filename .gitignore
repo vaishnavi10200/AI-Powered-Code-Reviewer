@@ -9,5 +9,5 @@ backend/.venv/
 # Environment variables
 .env
 
-# Node (for frontend, optional)
+# Node 
 node_modules/
