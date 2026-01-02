@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from analyzer import analyze_code
 
 app = Flask(__name__)
 CORS(app)
@@ -13,10 +14,15 @@ def review_code():
     data = request.json
     code = data.get("code","")
 
+    if not code:
+        return jsonify({"error": "No code provided"}), 400
+    
+    # Analyze the Code
+    analysis = analyze_code(code)
+
     return jsonify({
         "status" : "success",
-        "original_code" : code,
-        "feedback" : "Analysis coming soon!"
+        "analysis": analysis
     })
 
 if __name__ == "__main__":
