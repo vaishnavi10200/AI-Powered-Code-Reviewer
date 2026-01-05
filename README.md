@@ -23,9 +23,9 @@ Analyzes code files and provides intelligent feedback on:
 - [x] Day 2: Backend foundation
 - [x] Day 3: Basic analysis
 - [x] Day 4: AI-powered code reviews with Google Gemini
-- [ ] Day 5: Frontend UI
-- [ ] Day 6: Integration & testing
-
+- [x] Day 5: Frontend HTML structure
+- [ ] Day 6: Frontend CSS styling
+- [ ] Day 7: Frontend JavaScript & API integration
 
 
 
