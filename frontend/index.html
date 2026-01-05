@@ -8,12 +8,12 @@
 </head>
 <body>
     <!-- Top Navigation -->
-    <nav>
-        <div>
+    <nav class="navbar">
+        <div class="logo">
             <span>⚡</span>
             <span>CodeReviewer</span>
         </div>
-        <div>
+        <div class="nav-links">
             <a href="#">Problems</a>
             <a href="#">Discuss</a>
             <a href="#">About</a>
@@ -21,13 +21,13 @@
     </nav>
 
     <!-- Main Container -->
-    <div>
+    <div class="container">
         <!-- Left Panel - Code Editor -->
-        <div>
+        <div class="editor-panel">
             <!-- Editor Header -->
-            <div>
+            <div class="editor-header">
                 <label for="language">Language:</label>
-                <select id="language">
+                <select id="language" class="language-select">
                     <option value="python">Python</option>
                     <option value="javascript">JavaScript</option>
                     <option value="java">Java</option>
@@ -38,81 +38,82 @@
             </div>
 
             <!-- Code Textarea -->
-            <div>
+            <div class="editor-content">
                 <textarea 
                     id="code-input" 
+                    class="code-textarea"
                     placeholder="Write or paste your code here..."
                     rows="20"
                 ></textarea>
             </div>
 
             <!-- Action Buttons -->
-            <div>
-                <button id="review-btn">
+            <div class="action-bar">
+                <button id="review-btn" class="btn btn-primary">
                     <span>▶</span>
                     <span>Run Analysis</span>
                 </button>
-                <button id="clear-btn">Clear</button>
+                <button id="clear-btn" class="btn btn-secondary">Clear</button>
             </div>
         </div>
 
         <!-- Right Panel - Results -->
-        <div>
+        <div class="results-panel">
             <!-- Results Header -->
-            <div>
+            <div class="results-header">
                 <h2>Analysis Results</h2>
             </div>
 
             <!-- Results Content -->
-            <div id="results-content">
+            <div id="results-content" class="results-content">
                 <!-- Empty State -->
-                <div id="empty-state">
-                    <div>📊</div>
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-icon">📊</div>
                     <h3>No Analysis Yet</h3>
                     <p>Write some code and click "Run Analysis" to see detailed feedback</p>
                 </div>
 
                 <!-- Loading -->
-                <div id="loading" style="display: none;">
-                    <div>Loading...</div>
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
                     <p>Analyzing your code...</p>
                 </div>
 
                 <!-- Results -->
-                <div id="analysis-results" style="display: none;">
+                <div id="analysis-results" class="analysis-results" style="display: none;">
                     <!-- Score -->
-                    <div>
-                        <div>
-                            <span id="score-value">0</span>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="score-value" class="score-value">0</span>
                         </div>
-                        <div>
+                        <div class="score-info">
                             <h3>Code Quality Score</h3>
                             <p id="score-message">Waiting for analysis...</p>
                         </div>
                     </div>
 
                     <!-- Issues -->
-                    <div>
-                        <div>🔍 Issues Found</div>
-                        <div id="issues-container"></div>
+                    <div class="analysis-section">
+                        <div class="section-title">🔍 Issues Found</div>
+                        <div id="issues-container" class="issues-container"></div>
                     </div>
 
                     <!-- AI Insights -->
-                    <div>
-                        <div>🤖 AI Insights</div>
-                        <div id="ai-insights-container"></div>
+                    <div class="analysis-section">
+                        <div class="section-title">🤖 AI Insights</div>
+                        <div id="ai-insights-container" class="insights-container"></div>
                     </div>
 
                     <!-- Security -->
-                    <div>
-                        <div>🔒 Security Analysis</div>
-                        <div id="security-container"></div>
+                    <div class="analysis-section">
+                        <div class="section-title">🔒 Security Analysis</div>
+                        <div id="security-container" class="security-container"></div>
                     </div>
 
                     <!-- Performance -->
-                    <div>
-                        <div>⚡ Performance Tips</div>
-                        <div id="performance-container"></div>
+                    <div class="analysis-section">
+                        <div class="section-title">⚡ Performance Tips</div>
+                        <div id="performance-container" class="performance-container"></div>
                     </div>
                 </div>
             </div>
