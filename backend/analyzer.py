@@ -44,7 +44,7 @@ def analyze_code(code):
     if short_func_names:
         issues.append(f"Use descriptive function names instead of: {', '.join(short_func_names)}")
     
-    # Check 7: Common security issues (NEW)
+    # Check 7: Common security issues 
     if 'eval(' in code:
         issues.append("CRITICAL: Never use eval() - major security risk")
     if 'exec(' in code:
@@ -52,13 +52,13 @@ def analyze_code(code):
     if 'os.system(' in code:
         issues.append("Security risk: os.system() can execute arbitrary commands")
     
-    # Check 8: Inefficient patterns (NEW)
+    # Check 8: Inefficient patterns 
     nested_loops = len(re.findall(r'for\s+\w+\s+in.*:\s*\n\s+for\s+\w+\s+in', code))
     if nested_loops > 0:
         suggestions.append("Nested loops detected - consider optimizing for better performance")
     
 
-    # Calculate score (MORE STRICT)
+    # Calculate score 
     score = 100
     score -= len(issues) * 8        # Each issue: -8 points 
     score -= len(suggestions) * 5   # Each suggestion: -5 points
