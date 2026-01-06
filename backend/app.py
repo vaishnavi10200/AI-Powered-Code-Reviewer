@@ -29,7 +29,6 @@ def review_code():
         if not code:
             return jsonify({"error": "No code provided"}), 400
         
-        # Limit code length to prevent abuse
         if len(code) > 10000:
             return jsonify({"error": "Code too long (max 10,000 characters)"}), 400
         
@@ -39,10 +38,10 @@ def review_code():
         # AI analysis
         ai_response = get_ai_review(code, GEMINI_API_KEY)
 
-        # Try to parse AI response as JSON
+        # Parse AI response as JSON
         ai_analysis = None
         try:
-            # First, try to remove markdown code blocks if present
+            # Remove markdown code blocks if present
             cleaned_response = re.sub(r'```json\s*|\s*```', '', ai_response).strip()
             
             # Try parsing as JSON
@@ -61,12 +60,63 @@ def review_code():
                 "raw_response": ai_response[:500]  # Include partial raw response for debugging
             }
         
-        return jsonify({
-            "status": "success",
-            "basic_analysis": basic_analysis,
-            "ai_analysis": ai_analysis,
-            "language": language
-        })
+        # Calculate final score (average of basic and AI scores)
+        final_score = (basic_analysis['score'] + ai_analysis.get('ai_score', 0)) // 2
+
+        # Convert basic issues to frontend format
+        formatted_issues = []
+        for issue in basic_analysis.get('issues', []):
+            formatted_issues.append({
+                'type': 'warning',
+                'title': 'Code Style Issue',
+                'description': issue,
+                'line': None
+            })
+
+        # Convert AI issues to frontend format
+        for issue in ai_analysis.get('issues', []):
+            severity = issue.get('severity', 'warning')
+            # Map severity to frontend types
+            issue_type = 'error' if severity in ['critical', 'high'] else 'warning' if severity == 'medium' else 'info'
+            formatted_issues.append({
+                'type': issue_type,
+                'title': 'AI Detected Issue',
+                'description': issue.get('description', ''),
+                'line': issue.get('line')
+            })
+            
+        # Extract security issues
+        security_list = []
+        for item in ai_analysis.get('security', []):
+            if isinstance(item, dict):
+                security_list.append(item.get('description', str(item)))
+            else:
+                security_list.append(str(item))
+
+        # Extract performance tips
+        performance_list = []
+        for item in ai_analysis.get('performance', []):
+            if isinstance(item, dict):
+                performance_list.append(item.get('suggestion', str(item)))
+            else:
+                performance_list.append(str(item))
+
+        # Combine suggestions
+        all_suggestions = basic_analysis.get('suggestions', []) + ai_analysis.get('best_practices', [])
+
+        # Format response exactly as frontend expects
+        result = {
+            'score': final_score,
+            'issues': formatted_issues,
+            'ai_review': {
+                'suggestions': all_suggestions,
+                'security': security_list,
+                'performance': performance_list
+            }
+        }                
+
+        print(f"Returning result with score: {final_score}")  # Debug log
+        return jsonify(result)
     
     except Exception as e:
         print(f"Error in review_code: {e}")

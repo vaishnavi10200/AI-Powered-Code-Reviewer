@@ -354,7 +354,84 @@ body {
     gap: 12px;
 }
 
-/*  */
+/* ISSUE CARDS */
+
+.issue-card {
+    background: #1a1a1a;
+    border: 1px solid #2d2d2d;
+    border-left: 3px solid #ffa116;
+    border-radius: 6px;
+    padding: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.issue-card:hover {
+    border-left-color: #ffb84d;
+}
+
+.issue-card.error {
+    border-left-color: #ef4444;
+}
+
+.issue-card.warning {
+    border-left-color: #ffa116;
+}
+
+.issue-card.success {
+    border-left-color: #00c896;
+}
+
+.issue-card.info {
+    border-left-color: #3b82f6;
+}
+
+.issue-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.issue-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.issue-badge.error {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.issue-badge.warning {
+    background: rgba(255, 161, 22, 0.2);
+    color: #ffa116;
+}
+
+.issue-badge.info {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.issue-badge.success {
+    background: rgba(0, 200, 150, 0.2);
+    color: #00c896;
+}
+
+.issue-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #eff1f6;
+}
+
+.issue-description {
+    font-size: 13px;
+    color: #999;
+    line-height: 1.5;
+}
+
 /* CUSTOM SCROLLBAR */
 
 ::-webkit-scrollbar {
